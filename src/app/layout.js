@@ -1,5 +1,6 @@
 import { Roboto } from 'next/font/google';
 import "./globals.css";
+import AuthProvider from '@/libs/AuthProvider';
 
 export const metadata = {
   title: "Create Next App",
@@ -14,10 +15,10 @@ const robotoFont = Roboto({
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${robotoFont.className} antialiased`}
-      >
-        {children}
+      <body className={`${robotoFont.className} antialiased`}>
+        <AuthProvider>
+          {children}
+        </AuthProvider>
       </body>
     </html>
   );
