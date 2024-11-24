@@ -40,7 +40,6 @@ export default function Header() {
             <Image src={logo} priority={true} alt="placeholder logo" className="w-32"/>
           </div>
         </Link>
-        <p className='font-bold text-2xl text-white'> Item Management System </p>
         <ul className='flex gap-x-4 relative'>
           <li>
             <button onClick={handleUserMenu} className='flex items-center gap-x-4 text-white'>

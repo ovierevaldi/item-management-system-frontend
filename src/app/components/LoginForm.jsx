@@ -43,7 +43,13 @@ export default function LoginForm() {
             const user = await ApiProvider.signUser(userData);
             return user;
         } catch (error) {
-            setErrorCallApi(error.response.data.message);
+            console.log(error)
+            if(error.response.data.message){
+                setErrorCallApi(error.response.data.message);
+            }
+            else{
+                setErrorCallApi("Couldn't Connect to Server")
+            }
             return null;
         } finally {
             setIsLoadApi(false);

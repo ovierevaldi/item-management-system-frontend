@@ -42,6 +42,10 @@ class ApiProviderClass{
         return await this.apiManager.post(url, data);
     }
 
+    async get(url){
+        return await this.apiManager.get(url);
+    }
+
     async signUser(userData, fromZod = true){
         let data = userData;
 
@@ -58,6 +62,15 @@ class ApiProviderClass{
         } catch (error) {
             console.log(error)
             throw error;
+        }
+    }
+
+    async getItems(){
+        try {
+            return await this.get('/items')
+        } catch (error) {
+            console.log(error);
+            throw error
         }
     }
 
