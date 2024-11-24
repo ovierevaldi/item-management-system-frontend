@@ -1,6 +1,7 @@
 import { Roboto } from 'next/font/google';
 import "./globals.css";
 import AuthProvider from '@/libs/AuthProvider';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata = {
   title: "Create Next App",
@@ -16,6 +17,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${robotoFont.className} antialiased`}>
+        <Toaster />
         <AuthProvider>
           {children}
         </AuthProvider>

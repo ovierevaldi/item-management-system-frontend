@@ -4,6 +4,7 @@ import { allowedImageExtentions } from '@/configs/config';
 import ApiProvider from '@/libs/api-provider';
 import zodValidation from '@/libs/zod-validation';
 import React, { useEffect, useState } from 'react'
+import toast from 'react-hot-toast';
 
 export default function CreateItemForm({onSuccessCreateForm}) {
     const [errorFormValidation, seterrorFormValidation] = useState({});
@@ -48,7 +49,7 @@ export default function CreateItemForm({onSuccessCreateForm}) {
 
         if(response){
             // Save user data into session storage
-            alert('Create item success');
+            toast.success('Create item success');
             onSuccessCreateForm();
             // sesStorageProvider().saveUserData(response.data);
             
