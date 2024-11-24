@@ -74,6 +74,31 @@ class ApiProviderClass{
         }
     }
 
+    async getCategories(){
+        try {
+            return await this.get('/categories')
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+
+    async createItem(itemData, fromZod = true){
+        let data = itemData;
+
+        if(!fromZod){
+           console.log('Method not implemented');
+        }
+
+        try {
+            const response = await this.post('/items', data);
+            return response;
+        } catch (error) {
+            console.log(error)
+            throw error;
+        }
+    }
+
 }
 const ApiProvider = new ApiProviderClass(process.env.NEXT_PUBLIC_API_URL);
 

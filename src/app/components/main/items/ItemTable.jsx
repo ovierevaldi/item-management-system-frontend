@@ -1,13 +1,20 @@
 'use client'
 
 import ApiProvider from '@/libs/api-provider'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import { IoIosRefresh } from "react-icons/io";
+import ActionButton from './ActionButton';
 
-export default function ItemTable() {
+export default function ItemTable({handleTableAction}) {
     const whitelistColumn = ['url_gambar'];
 
     const [items, setItems] = useState([]);
     const [isLoadApi, setIsLoadApi] = useState(false);
+    const [refetchApi, setRefetchApi] = useState(0);
+
+    function handleActionBtn(type){
+        handleTableAction(type)
+    }
 
     useEffect(() => {
         const fetchItemData = async () => {
@@ -25,7 +32,7 @@ export default function ItemTable() {
         };
 
         fetchItemData();
-    }, [])
+    }, [refetchApi])
   return (
     isLoadApi ? 
         <p className='text-lg text-center'>
@@ -34,38 +41,53 @@ export default function ItemTable() {
         
         : 
 
-        <table className='w-full'>
-            <thead className='bg-indigo-500'>
-                <tr className='text-lg text-white'>
-                    {
-                        items.slice(0,1).map((value) => {
-                            return Object.keys(value).filter(key => !whitelistColumn.includes(key)).map((keys) => 
-                                <th 
-                                    key={keys}
-                                    className='p-2 border border-gray-100'>
-                                    {keys}
-                                </th>
-                            )
-                        })
-                    }
-                    <th className='p-2 border border-gray-100'>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                {items.map((item_data, index) => 
-                    <tr key={index}
-                    className='text-center hover:bg-gray-500/20'>
+        <div>
+            <table className='mb-4 min-w-[750px]'>
+                <thead className='bg-indigo-500'>
+                    <tr className='text-lg text-white'>
                         {
-                            Object.keys(item_data).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
-                                <td key={index}
-                                className='p-2 border '>
-                                    {item_data[key]}
-                                </td>
-                            )
+                            items.slice(0,1).map((value) => {
+                                return Object.keys(value).filter(key => !whitelistColumn.includes(key)).map((keys) => 
+                                    <th 
+                                        key={keys}
+                                        className='p-2 border border-gray-100'>
+                                        {keys}
+                                    </th>
+                                )
+                            })
                         }
+                        <th className='p-2 border border-gray-100'>Actions</th>
                     </tr>
-                )}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {items.map((item_data, index) => 
+                        <tr key={index}
+                            className='text-center '>
+                            {
+                                Object.keys(item_data).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
+                                    <td key={index}
+                                        className='p-2 border'>
+                                        <span>{item_data[key]}</span>
+                                    </td>
+                                )
+                            }
+                            <td className='p-2 border flex justify-center items-center gap-x-4'>
+                                <ActionButton type={'Update'} handleActionBtnClick={handleActionBtn}>Update</ActionButton>
+                                <ActionButton 
+                                    handleActionBtnClick={handleActionBtn}
+                                type={'Delete'}>Delete</ActionButton>
+                            </td>
+                        </tr>
+                    )}
+                </tbody>
+            </table>
+
+            <button className='bg-gray-300 p-2 rounded-sm hover:bg-gray-500/50'>
+                <IoIosRefresh 
+                    onClick={() => setRefetchApi(refetchApi + 1)}
+                    size={25}
+                />
+            </button>
+        </div>
   )
 }

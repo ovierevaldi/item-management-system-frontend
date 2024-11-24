@@ -44,7 +44,7 @@ export default function LoginForm() {
             return user;
         } catch (error) {
             console.log(error)
-            if(error.response.data.message){
+            if(error.response){
                 setErrorCallApi(error.response.data.message);
             }
             else{

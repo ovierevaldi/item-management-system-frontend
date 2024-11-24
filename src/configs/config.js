@@ -18,4 +18,7 @@ const configMenus = [
     new Menu('Stock', HiDocumentReport, '/main/stock')
 ];
 
-export  {configMenus};
+const allowedImageExtentions = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp']
+
+
+export  {configMenus, allowedImageExtentions};

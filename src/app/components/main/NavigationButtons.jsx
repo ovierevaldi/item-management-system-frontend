@@ -1,7 +1,7 @@
 "use client"
 
 import React from 'react'
-import { configMenus } from '@/app/configs/config';
+import { configMenus } from '@/configs/config';
 import { useRouter } from "next/navigation";
 
 export default function NavigationButtons({menu}) {
