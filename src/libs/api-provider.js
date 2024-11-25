@@ -171,6 +171,15 @@ class ApiProviderClass{
         }
     }
 
+    async getItemStock(){
+        try {
+            return await this.get('/items/stock')
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+
 }
 const ApiProvider = new ApiProviderClass(process.env.NEXT_PUBLIC_API_URL);
 
