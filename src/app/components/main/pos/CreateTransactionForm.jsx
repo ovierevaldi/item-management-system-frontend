@@ -8,7 +8,7 @@ import ListItemDropdown from './ListItemDropdown';
 import currency from '@/libs/currency';
 import zodValidation from '@/libs/zod-validation';
 
-export default function CreateTransactionForm() {
+export default function CreateTransactionForm({handleSuccessCreateTransaction}) {
     const [listItem, setListItem] = useState([]);
     const [inputNama, setInputNama] = useState('')
     const [errorApiMessage, setErrorApiMessage] = useState("");
@@ -97,6 +97,7 @@ export default function CreateTransactionForm() {
         if(response){
             // Save user data into session storage
             toast.success('Success Create Transaction');
+            onSuccessCreateTransaction(response.data.ref);
         }
     };
 
@@ -115,6 +116,10 @@ export default function CreateTransactionForm() {
         } finally {
             setIsPostingTransaction(false);
         }
+    }
+
+    const onSuccessCreateTransaction = (id) => {
+        handleSuccessCreateTransaction(id)
     }
 
     const clearError = () => {
@@ -194,8 +199,9 @@ export default function CreateTransactionForm() {
         <p>Total: {currency().convertToRupiah(selectedItemDetail.harga * jumlahItem)}</p>
 
         <button
+            disabled={isPostingTransaction}
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            className="w-full disabled:bg-blue-300 bg-blue-600 text-white py-2 px-4 rounded-lg shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
         >
         Submit
         </button>

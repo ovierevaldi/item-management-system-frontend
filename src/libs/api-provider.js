@@ -162,6 +162,18 @@ class ApiProviderClass{
         }
     }
 
+    async getDetailTransaction(id){
+        if(!id)
+            return toast.error('Please Input Item ID!')    
+        
+        try {
+            return await this.get(`/pos/transactions/${id}`)
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+
     async getAllTransaction(){
         try {
             return await this.get('/pos/reports')
