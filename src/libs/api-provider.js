@@ -146,6 +146,31 @@ class ApiProviderClass{
         }
     }
 
+    async postTransaction(transactionData, fromZod = true){
+        let data = transactionData;
+
+        if(!fromZod){
+           console.log('Method not implemented');
+        }
+
+        try {
+            const response = await this.post('/pos/transactions', data);
+            return response;
+        } catch (error) {
+            console.log(error)
+            throw error;
+        }
+    }
+
+    async getAllTransaction(){
+        try {
+            return await this.get('/pos/reports')
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+
 }
 const ApiProvider = new ApiProviderClass(process.env.NEXT_PUBLIC_API_URL);
 

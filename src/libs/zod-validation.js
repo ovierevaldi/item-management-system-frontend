@@ -20,6 +20,11 @@ const zodValidation = () => {
                     return allowedImageExtentions.includes(value)
                 }), 
             }),
+        }),
+
+        transactionSchema: z.object({
+            nama: z.string().min(1, "Nama is required").min(4, "Nama must be greater than 4 characters").max(25, "Nama must be less than 25 characters"),
+            jumlah_item: z.number().int().min(1, "Jumlah Item minimal 1").nonnegative("Jumlah Item tidak boleh negatif"),
         })
 
     }
@@ -32,8 +37,13 @@ const zodValidation = () => {
         return schemas.itemSchemas.safeParse(data);
     }
 
+    function parseTransaction(data){
+        return schemas.transactionSchema.safeParse(data)
+    }
+
     return {
-        parseUser, parseItem
+        parseUser, parseItem,
+        parseTransaction
     }
 };
 
