@@ -1,6 +1,7 @@
 'use client'
 
 import CreateItemForm from '@/app/components/main/items/CreateItemForm';
+import DeleteForm from '@/app/components/main/items/DeleteForm';
 import ItemTable from '@/app/components/main/items/ItemTable';
 import UpdateItemForm from '@/app/components/main/items/UpdateItemForm';
 import Modal from '@/app/components/Modal';
@@ -36,6 +37,10 @@ export default function ItemPage() {
 
   function handleSuccessUpdateItemModal(){
     closeUpdateModal();
+  }
+
+  function handleSuccessDeleteModal(){
+    closeDeleteModal();
   }
 
   function handleTableActionBtn(id, type){
@@ -93,7 +98,7 @@ export default function ItemPage() {
           data={{title: 'Delete Item'}} 
           isOpen={isDeleteModalOpen} 
           onClose={closeDeleteModal}>
-            <>test</>
+            <DeleteForm id={selectedActionItemId} handleSuccessDelete={handleSuccessDeleteModal}/>
         </Modal>
     </div>
   )
