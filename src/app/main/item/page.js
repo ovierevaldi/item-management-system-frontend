@@ -2,8 +2,10 @@
 
 import CreateItemForm from '@/app/components/main/items/CreateItemForm';
 import ItemTable from '@/app/components/main/items/ItemTable';
+import UpdateItemForm from '@/app/components/main/items/UpdateItemForm';
 import Modal from '@/app/components/Modal';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 import { IoMdCreate } from "react-icons/io";
 
 export default function ItemPage() {
@@ -12,31 +14,48 @@ export default function ItemPage() {
   const closeModal = () => setIsModalOpen(false);
 
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
-  const openUpdateModal = () => setIsUpdateModalOpen(true);
-  const closeUpdateModal = () => setIsUpdateModalOpen(false);
+  const openUpdateModal = (id) => {
+    return setIsUpdateModalOpen(true)
+  };
+  const closeUpdateModal = () => {
+    return setIsUpdateModalOpen(false)
+  };
 
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-  const openDeleteModal = () => setIsDeleteModalOpen(true);
-  const closeDeleteModal = () => setIsDeleteModalOpen(false);
+
+  const openDeleteModal = (id) => {
+    return setIsDeleteModalOpen(true)
+  };
+  const closeDeleteModal = () => {
+    return setIsDeleteModalOpen(false)
+  };
 
   function handleSuccessCreateItemModal(){
     closeModal();
   }
 
-  function handleTableActionBtn(type){
+  function handleSuccessUpdateItemModal(){
+    closeUpdateModal();
+  }
+
+  function handleTableActionBtn(id, type){
+    setSelectedActionItemId(id);
+
     switch (type) {
       case 'Update':
-        openUpdateModal();
+        openUpdateModal(id);
         break;
       
       case 'Delete':
-          openDeleteModal();
+          openDeleteModal(id);
           break;
 
       default:
         break;
     }
   }
+
+  const [selectedActionItemId, setSelectedActionItemId] = useState(null)
 
   return (
     <div className='space-y-8'>
@@ -66,7 +85,8 @@ export default function ItemPage() {
           data={{title: 'Update Item'}} 
           isOpen={isUpdateModalOpen} 
           onClose={closeUpdateModal}>
-            <>test</>
+            <UpdateItemForm id={selectedActionItemId} onSuccessUpdateItem={handleSuccessUpdateItemModal}
+            />
         </Modal>
 
         <Modal 

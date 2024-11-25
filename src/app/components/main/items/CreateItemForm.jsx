@@ -104,6 +104,10 @@ export default function CreateItemForm({onSuccessCreateForm}) {
         onSubmit={handleCreateItemForm} 
         method='post' 
         className='space-y-8 min-w-[400px]'>
+        
+        {
+          errorCreateItemApi && <p className='text-red-500 text-center font-semibold text-lg'>{errorCreateItemApi}</p>
+        }
 
         <div className='flex flex-col'>
             <label className='mb-2 font-bold' htmlFor="nama">
@@ -183,7 +187,7 @@ export default function CreateItemForm({onSuccessCreateForm}) {
         </div>
         
         <div className='flex flex-col'>
-            <label className='mb-2 font-bold' htmlFor="kategori">Kategori:</label>
+            <label className='mb-2 font-bold' htmlFor="kategori">Gambar:</label>
             <input 
                 name='gambar'
                 id='gambar'

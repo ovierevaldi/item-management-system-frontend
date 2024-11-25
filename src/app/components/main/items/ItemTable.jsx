@@ -12,8 +12,8 @@ export default function ItemTable({handleTableAction}) {
     const [isLoadApi, setIsLoadApi] = useState(false);
     const [refetchApi, setRefetchApi] = useState(0);
 
-    function handleActionBtn(type){
-        handleTableAction(type)
+    function handleActionBtn(type, id){
+        handleTableAction(type, id)
     }
 
     useEffect(() => {
@@ -72,10 +72,18 @@ export default function ItemTable({handleTableAction}) {
                                 )
                             }
                             <td className='p-2 border flex justify-center items-center gap-x-4'>
-                                <ActionButton type={'Update'} handleActionBtnClick={handleActionBtn}>Update</ActionButton>
                                 <ActionButton 
+                                    type={'Update'} 
+                                    id={item_data.id}
+                                    handleActionBtnClick={handleActionBtn}>
+                                    Update
+                                </ActionButton>
+                                <ActionButton
+                                    id={item_data.id}
                                     handleActionBtnClick={handleActionBtn}
-                                type={'Delete'}>Delete</ActionButton>
+                                    type={'Delete'}
+                                    >Delete
+                                </ActionButton>
                             </td>
                         </tr>
                     )}

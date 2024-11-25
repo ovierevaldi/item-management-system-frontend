@@ -20,5 +20,10 @@ const configMenus = [
 
 const allowedImageExtentions = ['image/jpeg', 'image/png', 'image/gif', 'image/webp', 'image/bmp']
 
+const typeList = {
+    text: 'text',
+    password: 'password',
+    number: 'number'
+}
 
-export  {configMenus, allowedImageExtentions};
+export  {configMenus, allowedImageExtentions, typeList};

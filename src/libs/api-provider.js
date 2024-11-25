@@ -1,4 +1,5 @@
 import axios from "axios";
+import toast from "react-hot-toast";
 
 class ApiProviderClass{
     apiManager;
@@ -44,6 +45,10 @@ class ApiProviderClass{
 
     async get(url){
         return await this.apiManager.get(url);
+    }
+
+    async patch(url, data){
+        return await this.apiManager.patch(url, data)
     }
 
     async signUser(userData, fromZod = true){
@@ -92,6 +97,34 @@ class ApiProviderClass{
 
         try {
             const response = await this.post('/items', data);
+            return response;
+        } catch (error) {
+            console.log(error)
+            throw error;
+        }
+    }
+
+    async getItem(item_id){
+        if(!item_id)
+            return toast.error('Please Input Item ID!')    
+        
+        try {
+            return await this.get(`/items/${item_id}`)
+        } catch (error) {
+            console.log(error);
+            throw error
+        }
+    }
+
+    async updateItem(item_id, itemData, fromZod = true){
+        let data = itemData;
+
+        if(!fromZod){
+           console.log('Method not implemented');
+        }
+
+        try {
+            const response = await this.patch(`/items/${item_id}`, data);
             return response;
         } catch (error) {
             console.log(error)
