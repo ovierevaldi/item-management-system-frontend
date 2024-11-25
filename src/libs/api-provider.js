@@ -51,6 +51,10 @@ class ApiProviderClass{
         return await this.apiManager.patch(url, data)
     }
 
+    async delete(url){
+        return await this.apiManager.delete(url)
+    }
+
     async signUser(userData, fromZod = true){
         let data = userData;
 
@@ -125,6 +129,16 @@ class ApiProviderClass{
 
         try {
             const response = await this.patch(`/items/${item_id}`, data);
+            return response;
+        } catch (error) {
+            console.log(error)
+            throw error;
+        }
+    }
+
+    async deleteItem(item_id){
+        try {
+            const response = await this.delete(`/items/${item_id}`);
             return response;
         } catch (error) {
             console.log(error)

@@ -11,36 +11,38 @@ import { IoMdCreate } from "react-icons/io";
 
 export default function ItemPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedActionItemId, setSelectedActionItemId] = useState(null);
+  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
+  const [refetchApi, setRefetchApi] = useState(0);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-
-  const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const openUpdateModal = (id) => {
     return setIsUpdateModalOpen(true)
   };
   const closeUpdateModal = () => {
     return setIsUpdateModalOpen(false)
   };
-
-  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
-
   const openDeleteModal = (id) => {
     return setIsDeleteModalOpen(true)
   };
   const closeDeleteModal = () => {
     return setIsDeleteModalOpen(false)
   };
-
   function handleSuccessCreateItemModal(){
     closeModal();
+    setRefetchApi((val) => (val + 1));
   }
 
   function handleSuccessUpdateItemModal(){
     closeUpdateModal();
+    setRefetchApi((val) => (val + 1));
   }
 
   function handleSuccessDeleteModal(){
     closeDeleteModal();
+    setRefetchApi((val) => (val + 1));
   }
 
   function handleTableActionBtn(id, type){
@@ -60,15 +62,13 @@ export default function ItemPage() {
     }
   }
 
-  const [selectedActionItemId, setSelectedActionItemId] = useState(null)
-
   return (
     <div className='space-y-8'>
         <p className='text-2xl font-semibold text-center'>List Item</p>
         
         <div className='flex justify-center'>
           <div className='overflow-auto w-full'>
-            <ItemTable handleTableAction={handleTableActionBtn}/>
+            <ItemTable handleTableAction={handleTableActionBtn} refetchApi={refetchApi}/>
           </div>
         </div>
 

@@ -5,12 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { IoIosRefresh } from "react-icons/io";
 import ActionButton from './ActionButton';
 
-export default function ItemTable({handleTableAction}) {
+export default function ItemTable({handleTableAction, refetchApi}) {
     const whitelistColumn = ['url_gambar'];
 
     const [items, setItems] = useState([]);
     const [isLoadApi, setIsLoadApi] = useState(false);
-    const [refetchApi, setRefetchApi] = useState(0);
 
     function handleActionBtn(type, id){
         handleTableAction(type, id)
@@ -90,12 +89,12 @@ export default function ItemTable({handleTableAction}) {
                 </tbody>
             </table>
 
-            <button className='bg-gray-300 p-2 rounded-sm hover:bg-gray-500/50'>
+            {/* <button className='bg-gray-300 p-2 rounded-sm hover:bg-gray-500/50'>
                 <IoIosRefresh 
                     onClick={() => setRefetchApi(refetchApi + 1)}
                     size={25}
                 />
-            </button>
+            </button> */}
         </div>
   )
 }
