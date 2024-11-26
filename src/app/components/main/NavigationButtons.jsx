@@ -18,7 +18,7 @@ export default function NavigationButtons({menu}) {
             <button
                 onClick={() => goToMenu(menu.route)}
                 key={menu.name}
-                className='flex items-center mb-4 hover:bg-indigo-500/80 rounded-lg hover:text-white p-2 w-full gap-x-4'>
+                className='flex items-center mb-4 hover:bg-indigo-500/80 rounded-lg hover:text-white p-2 w-full gap-x-4 text-sm md:text-base'>
                 <menu.icon size={15}/>
                 <p 
                     className='text-center '>

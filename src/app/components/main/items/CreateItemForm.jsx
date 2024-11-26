@@ -106,7 +106,10 @@ export default function CreateItemForm({onSuccessCreateForm}) {
         className='space-y-8 min-w-[400px]'>
         
         {
-          errorCreateItemApi && <p className='text-red-500 text-center font-semibold text-lg'>{errorCreateItemApi}</p>
+          errorCreateItemApi && 
+            <p className='text-red-500 text-center font-semibold text-lg'>
+                {errorCreateItemApi}
+            </p>
         }
 
         <div className='flex flex-col'>
@@ -120,7 +123,8 @@ export default function CreateItemForm({onSuccessCreateForm}) {
                 placeholder=''
                 autoComplete='on'
                 className={
-                    `border rounded-lg px-4 py-2 outline-none focus:border-secondary focus:border-2 ${errorFormValidation.name ? 'border-red-500' : ''}`
+                    `border rounded-lg px-4 py-2 outline-none focus:border-secondary focus:border-2 
+                    ${errorFormValidation.name ? 'border-red-500' : ''}`
                 } />
                 {errorFormValidation.nama && 
                     errorFormValidation.nama.map((err, index) => index === 0 ? 

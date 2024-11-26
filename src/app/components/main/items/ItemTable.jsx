@@ -40,61 +40,52 @@ export default function ItemTable({handleTableAction, refetchApi}) {
         
         : 
 
-        <div>
-            <table className='mb-4 min-w-[750px]'>
-                <thead className='bg-indigo-500'>
-                    <tr className='text-lg text-white'>
+        <table className='mb-4 text-sm md:text-base xl:min-w-[850px]'>
+            <thead className='bg-indigo-500'>
+                <tr className='text-lg text-white'>
+                    {
+                        items.slice(0,1).map((value) => {
+                            return Object.keys(value).filter(key => !whitelistColumn.includes(key)).map((keys) => 
+                                <th 
+                                    key={keys}
+                                    className='md:p-2 border border-gray-100'>
+                                    {keys}
+                                </th>
+                            )
+                        })
+                    }
+                    <th className='md:p-2 border border-gray-100'>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {items.map((item_data, index) => 
+                    <tr key={index}
+                        className='text-center '>
                         {
-                            items.slice(0,1).map((value) => {
-                                return Object.keys(value).filter(key => !whitelistColumn.includes(key)).map((keys) => 
-                                    <th 
-                                        key={keys}
-                                        className='p-2 border border-gray-100'>
-                                        {keys}
-                                    </th>
-                                )
-                            })
+                            Object.keys(item_data).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
+                                <td key={index}
+                                    className='md:md:p-2 border '>
+                                    <span>{item_data[key]}</span>
+                                </td>
+                            )
                         }
-                        <th className='p-2 border border-gray-100'>Actions</th>
+                        <td className='md:p-2 border flex flex-col md:flex-row gap-y-2 justify-center items-center gap-x-8'>
+                            <ActionButton 
+                                type={'Update'} 
+                                id={item_data.id}
+                                handleActionBtnClick={handleActionBtn}>
+                                Update
+                            </ActionButton>
+                            <ActionButton
+                                id={item_data.id}
+                                handleActionBtnClick={handleActionBtn}
+                                type={'Delete'}
+                                >Delete
+                            </ActionButton>
+                        </td>
                     </tr>
-                </thead>
-                <tbody>
-                    {items.map((item_data, index) => 
-                        <tr key={index}
-                            className='text-center '>
-                            {
-                                Object.keys(item_data).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
-                                    <td key={index}
-                                        className='p-2 border'>
-                                        <span>{item_data[key]}</span>
-                                    </td>
-                                )
-                            }
-                            <td className='p-2 border flex justify-center items-center gap-x-4'>
-                                <ActionButton 
-                                    type={'Update'} 
-                                    id={item_data.id}
-                                    handleActionBtnClick={handleActionBtn}>
-                                    Update
-                                </ActionButton>
-                                <ActionButton
-                                    id={item_data.id}
-                                    handleActionBtnClick={handleActionBtn}
-                                    type={'Delete'}
-                                    >Delete
-                                </ActionButton>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </table>
-
-            {/* <button className='bg-gray-300 p-2 rounded-sm hover:bg-gray-500/50'>
-                <IoIosRefresh 
-                    onClick={() => setRefetchApi(refetchApi + 1)}
-                    size={25}
-                />
-            </button> */}
-        </div>
+                )}
+            </tbody>
+        </table>
   )
 }

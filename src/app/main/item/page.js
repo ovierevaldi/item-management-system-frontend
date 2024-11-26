@@ -63,21 +63,24 @@ export default function ItemPage() {
   }
 
   return (
-    <div className='space-y-8'>
-        <p className='text-2xl font-semibold text-center'>List Item</p>
+    <div className='space-y-8 flex items-center flex-col'>
+        <p className='text-2xl font-semibold text-center py-2'>List Item</p>
         
-        <div className='flex justify-center'>
-          <div className='overflow-auto w-full'>
-            <ItemTable handleTableAction={handleTableActionBtn} refetchApi={refetchApi}/>
+        <div className='flex gap-x-8 gap-y-4 flex-wrap px-2 justify-center'>
+          <div className='overflow-auto max-h-[550px] lg:max-h-[800px]'>
+              <ItemTable handleTableAction={handleTableActionBtn} refetchApi={refetchApi}/>
           </div>
-        </div>
 
-        <button 
-            onClick={openModal}
-            className='px-12 py-8 border-indigo-500/70 border-2 rounded-md flex   items-center justify-center gap-x-2 text-indigo-700 hover:bg-indigo-500/50 duration-100 '>
-            <IoMdCreate size={20}/>
-            <span className='text-lg font-semibold '>Create Item</span>
-        </button>
+          <div>
+            <button 
+                  onClick={openModal}
+                  className='px-4 py-4 md:px-12 md:py-8 border-indigo-500/70 border-2 rounded-md flex items-center justify-center gap-x-2 text-indigo-700 hover:bg-indigo-500/50 duration-100 '>
+                  <IoMdCreate size={20}/>
+                  <span className='text-lg font-semibold'>Create Item</span>
+              </button>
+          </div>
+          
+        </div>
 
         <Modal 
           data={{title: 'Create Item'}} 

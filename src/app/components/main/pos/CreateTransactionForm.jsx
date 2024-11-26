@@ -130,7 +130,7 @@ export default function CreateTransactionForm({handleSuccessCreateTransaction}) 
   return (
     <form 
         onSubmit={onFormSubmit} 
-        className="space-y-6 w-full">
+        className="space-y-6 w-full md:max-w-[380px]">
         
         {errorApiMessage && <p className="text-red-500 text-center mb-4">{errorApiMessage}</p>}
         
@@ -146,7 +146,7 @@ export default function CreateTransactionForm({handleSuccessCreateTransaction}) 
                     onChange={onInputNamaChange}
                     onFocus={() => onInputRoomFocus(true)}
                     className={
-                        `border rounded-lg px-4 py-2 outline-none focus:border-secondary focus:border-2 w-full`
+                        `border rounded-lg w-full px-4 py-2 outline-none focus:border-secondary focus:border-2`
                     }>
                 </input>
                 {formValidationErrors.nama && 

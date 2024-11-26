@@ -53,49 +53,54 @@ export default function ReportPOS() {
   }
 
   return (
-    <div className='p-4'>
-      <p className='text-center font-bold text-2xl mb-8'>Report POS (Point of Sales)</p>
-      <div className='max-h-[750px] overflow-y-auto'>
-        <table className='mb-4 min-w-[750px]'>
-          <thead className='bg-indigo-500'>
-              <tr className='text-lg text-white'>
-                  {
-                      listTransaction.slice(0,1).map((transaction) => {
-                          return Object.keys(transaction).filter(key => !whitelistColumn.includes(key)).map((key) => 
-                              <th 
-                                  key={key}
-                                  className='p-2 border border-gray-100'>
-                                  {key}
-                              </th>
-                          )
-                      })
-                  }
-                  {/* <th 
-                    className='p-2 border border-gray-100'>
-                    Actions
-                  </th> */}
-              </tr>
-          </thead>
-          <tbody>
-            {
-              listTransaction.map((transaction, index) => 
-                <tr
-                  className='text-center hover:bg-secondary/10' 
-                  key={index}>
-                  {
-                    Object.keys(transaction).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
-                    <td 
-                      key={index}
-                      className='p-2 border border-primary'>
-                      {transaction[key]}
-                    </td>
-                    )
-                  }
+    <div>
+      <p className='text-center font-bold text-2xl py-4'>
+        Report POS (Point of Sales)
+      </p>
+
+      <div className='p-4 flex justify-center'>
+        <div className='max-h-[700px] overflow-auto lg:w-[850px] xl:w-[1024px]'> 
+          <table className='mb-4 text-sm md:text-base w-full'>
+            <thead className='bg-indigo-500'>
+                <tr className='text-lg text-white'>
+                    {
+                        listTransaction.slice(0,1).map((transaction) => {
+                            return Object.keys(transaction).filter(key => !whitelistColumn.includes(key)).map((key) => 
+                                <th 
+                                    key={key}
+                                    className='p-1 md:p-2 border border-gray-100'>
+                                    {key}
+                                </th>
+                            )
+                        })
+                    }
+                    {/* <th 
+                      className='p-2 border border-gray-100'>
+                      Actions
+                    </th> */}
                 </tr>
-              )
-            }
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {
+                listTransaction.map((transaction, index) => 
+                  <tr
+                    className='text-center hover:bg-secondary/10' 
+                    key={index}>
+                    {
+                      Object.keys(transaction).filter(key => !whitelistColumn.includes(key)).map((key, index) => 
+                      <td 
+                        key={index}
+                        className='p-1 md:p-2 border border-primary'>
+                        {transaction[key]}
+                      </td>
+                      )
+                    }
+                  </tr>
+                )
+              }
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   )

@@ -35,10 +35,10 @@ export default function Stock() {
   }, [])
 
   return (
-    <div className='p-4'>
-      <p className='text-center font-bold text-2xl mb-8'>Stock Report</p>
-      <div className='max-h-[750px] overflow-y-auto'>
-        <table className='mb-4 min-w-[750px]'>
+    <div className='flex flex-col items-center space-y-4'>
+      <p className='text-center font-bold text-2xl py-4'>Stock Report</p>
+      <div className='max-h-[750px] overflow-auto md:w-[650px] xl:w-[1024px]'>
+        <table className='mb-4 text-sm md:text-base w-full'>
           <thead className='bg-indigo-500'>
               <tr className='text-lg text-white'>
                   {
